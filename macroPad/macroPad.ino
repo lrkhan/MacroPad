@@ -119,8 +119,18 @@ void keyAction(String key) {
       // statements
       break;
     case 2:
-      // F17
-      Keyboard.write(244);
+      // Zoom Mute Mic
+      if (isMac(mode)) {
+         Keyboard.press(KEY_LEFT_GUI);
+         delay(50);
+         Keyboard.press(KEY_LEFT_SHIFT);
+         delay(50);
+         Keyboard.press('a');
+         delay(50);
+         Keyboard.releaseAll();
+
+         break;
+        }
       break;
     case 3:
       // F18
@@ -163,7 +173,18 @@ void keyAction(String key) {
       Keyboard.write(249);
       break;
     case 30:
-      // statements
+      // Zoom Mute Video
+      if (isMac(mode)) {
+         Keyboard.press(KEY_LEFT_GUI);
+         delay(50);
+         Keyboard.press(KEY_LEFT_SHIFT);
+         delay(50);
+         Keyboard.press('v');
+         delay(50);
+         Keyboard.releaseAll();
+
+         break;
+        }
       break;
     case 31:
       // statements
