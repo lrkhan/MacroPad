@@ -2,6 +2,9 @@
 #include <HID-Project.h>
 #include <Encoder.h>
 
+// Led setup
+int LED = 17;
+
 //Control Mode
 char mode = 'm';
 
@@ -27,6 +30,31 @@ bool isMac(char key) {
   } else {
     return false;
   }
+}
+
+void keyWrite(String phrase) {
+  for (int i = 0; i< phrase.length(); i++){
+    Keyboard.press(phrase.charAt(i));
+    Keyboard.releaseAll();  
+  }
+  return;  
+}
+
+void blink(char key) {
+  if (isMac(key)) {
+    Keyboard.press(KEY_LEFT_GUI);
+    delay(50);
+    Keyboard.press(32); //space
+    delay(50);
+    Keyboard.releaseAll();
+    keyWrite("MAC");
+  } else {
+    Keyboard.press(KEY_LEFT_GUI);
+    delay(50);
+    Keyboard.releaseAll();
+    keyWrite("WINDOWS");
+  }
+  return;
 }
 
 String getKey() {
@@ -137,8 +165,10 @@ void keyAction(String key) {
       Keyboard.write(245);
       break;
     case 4:
+    // set to windows mode
       mode = 'w';
       Serial.println(mode);
+      blink(mode);
       break;
     case 10:
       // statements
@@ -155,8 +185,10 @@ void keyAction(String key) {
       Keyboard.write(247);
       break;
     case 14:
+    // set to mac ode
       mode = 'm';
       Serial.println(mode);
+      blink(mode);
       break;
     case 20:
       // statements
@@ -253,6 +285,8 @@ void encoderCommands() {
 void setup() {
   // put your setup code here, to run once:
 
+  pinMode(LED, OUTPUT);
+  
   key = "";
 
   // setting up cols as output
