@@ -35,12 +35,14 @@ bool isMac(char key) {
 void keyWrite(String phrase) {
   for (int i = 0; i< phrase.length(); i++){
     Keyboard.press(phrase.charAt(i));
+    delay(50);
     Keyboard.releaseAll();  
   }
   return;  
 }
 
-void blink(char key) {
+// This funciton is to tell you which key combinations are being used
+void whichKey(char key) {
   if (isMac(key)) {
     Keyboard.press(KEY_LEFT_GUI);
     delay(50);
@@ -83,34 +85,36 @@ String getKey() {
 void keyAction(String key) {
   switch (key.toInt()) {
     case 0:
-      // launch FireFox - open youtube and gmail
+      // launch FireFox - open youtube in new tab
       if (isMac(mode)) {
         Keyboard.press(KEY_LEFT_GUI);
+        delay(50);
         Keyboard.press(32); //space
+        delay(50);
         Keyboard.releaseAll();
-        Keyboard.println("fire");
+        keyWrite("firefox");
         Keyboard.press(KEY_RETURN);
-        delay(30);
-        Keyboard.release(KEY_RETURN);
-        delay(200);
+        delay(50);
+        Keyboard.releaseAll();
+        delay(50);
 
         Keyboard.press(KEY_LEFT_GUI);
-        Keyboard.press('l'); //spacefi
-        Keyboard.releaseAll();
-        Keyboard.println("youtube.com");
-        Keyboard.press(KEY_RETURN);
-        delay(30);
-        Keyboard.release(KEY_RETURN);
-        delay(200);
-
-        Keyboard.press(KEY_LEFT_GUI);
+        delay(50);
         Keyboard.press('t'); //space
+        delay(50);
         Keyboard.releaseAll();
-        Keyboard.println("gmail.com");
+
+        Keyboard.press(KEY_LEFT_GUI);
+        delay(50);
+        Keyboard.press('l');
+        delay(50);
+        Keyboard.releaseAll();
+        
+        keyWrite("youtube.com");
         Keyboard.press(KEY_RETURN);
-        delay(30);
-        Keyboard.release(KEY_RETURN);
-        delay(200);
+        delay(50);
+        Keyboard.releaseAll();
+        delay(50);
 
         break;
       }
@@ -168,10 +172,20 @@ void keyAction(String key) {
     // set to windows mode
       mode = 'w';
       Serial.println(mode);
-      blink(mode);
+      whichKey(mode);
       break;
     case 10:
-      // statements
+      // Mac - Spoken Content
+      if (isMac(mode)) {
+        Keyboard.press(KEY_LEFT_ALT );
+        delay(50);
+        Keyboard.press(KEY_ESC);
+        delay(50);
+        Keyboard.releaseAll();
+        
+        break;
+      }
+      
       break;
     case 11:
       // statements
@@ -188,7 +202,7 @@ void keyAction(String key) {
     // set to mac ode
       mode = 'm';
       Serial.println(mode);
-      blink(mode);
+      whichKey(mode);
       break;
     case 20:
       // statements
