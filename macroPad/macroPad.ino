@@ -2,9 +2,6 @@
 #include <HID-Project.h>
 #include <Encoder.h>
 
-// Led setup
-int LED = 17;
-
 //Control Mode
 char mode = 'm';
 
@@ -148,7 +145,23 @@ void keyAction(String key) {
 
       break;
     case 1:
-      // statements
+      // leave Zoom Meeting
+      if (isMac(mode)) {
+        Keyboard.press(KEY_LEFT_GUI);
+        delay(50);
+        Keyboard.press('w');
+        delay(50);
+        Keyboard.releaseAll();
+
+        delay(50);
+        
+        Keyboard.press(KEY_RETURN);
+        delay(50);
+        
+        Keyboard.releaseAll();
+
+         break;
+       }
       break;
     case 2:
       // Zoom Mute Mic
@@ -166,7 +179,16 @@ void keyAction(String key) {
       break;
     case 3:
       // F18
-      Keyboard.write(245);
+            // Zoom Mute Mic
+      if (isMac(mode)) {
+        Keyboard.press(KEY_LEFT_GUI);
+        delay(50);
+        Keyboard.press('q');
+        delay(50);
+        Keyboard.releaseAll();
+        
+        break;
+      }
       break;
     case 4:
     // set to windows mode
@@ -196,7 +218,8 @@ void keyAction(String key) {
       break;
     case 13:
       // F20
-      Keyboard.write(247);
+       keyAction("2");
+       keyAction("30");
       break;
     case 14:
     // set to mac ode
@@ -298,8 +321,6 @@ void encoderCommands() {
 
 void setup() {
   // put your setup code here, to run once:
-
-  pinMode(LED, OUTPUT);
   
   key = "";
 
