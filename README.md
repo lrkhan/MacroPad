@@ -8,4 +8,4 @@ MacroPad was made with mechanical switches, rotary encoders, and an arduino pro 
 ![](./img/MacMacro.png)
 
 ## Windows Key Map
-- No Currently in use
+- Not in use
